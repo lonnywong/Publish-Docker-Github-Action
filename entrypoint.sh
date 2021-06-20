@@ -63,6 +63,7 @@ main() {
 
   if usesBoolean "${INPUT_NO_PUSH}"; then
     if uses "${INPUT_USERNAME}" && uses "${INPUT_PASSWORD}"; then
+      cat /github/home/.docker/config.json
       docker logout
     fi
     exit 0
@@ -74,6 +75,7 @@ main() {
   DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERNAME})
   echo "::set-output name=digest::${DIGEST}"
 
+  cat /github/home/.docker/config.json
   docker logout
 }
 
